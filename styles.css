@@ -6,3 +6,17 @@
 @media(max-width:1000px){.hero-intro{min-height:520px;gap:15px}.hero h1{font-size:49px}.hero-description{font-size:15px}.hero-copy .button{gap:12px;padding:13px 17px}.product-context{padding:35px;gap:35px}.case-brand{font-size:17px}}
 @media(max-width:700px){.hero{padding-top:34px}.hero-intro{grid-template-columns:1fr;gap:20px;min-height:0}.hero h1{font-size:46px;letter-spacing:-1.5px;line-height:1.08}.hero-copy .eyebrow{font-size:7px;letter-spacing:1px}.hero-description{font-size:15px}.hero-note{max-width:none;font-size:8px}.hero-roofr{margin:0 auto;width:90%;max-width:420px}.hero-roofr img{width:100%;margin:0}.hero-roofr figcaption{font-size:8px}.hero-copy .actions{gap:9px}.hero-copy .button{font-size:11px;padding:12px 14px}.preview-label{margin-top:30px;gap:15px}.preview-label>span:last-child{display:none}.case-brand{font-size:15px}.roofr-logo{width:64px}.brand-divider{margin:0}.brand{gap:7px}.nav{gap:8px}.button.small{padding:9px 12px;font-size:10px}.product-context{grid-template-columns:1fr;padding:25px;gap:27px}.product-context h2{font-size:33px}.preview strong #preview-proposals{font-size:28px}.demo-takeaway{padding:21px}.demo-takeaway p{font-size:15px}.hero .preview-metrics strong{font-size:28px}.hero .preview-metrics strong .accent{font-size:20px}.hero .preview-metrics span{font-size:8px}.hero .preview-metrics strong span{font-size:28px}.hero .preview-metrics small{font-size:7px}.about h2{font-weight:900}}
 body{overflow-x:clip}.hero-intro{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}.hero-roofr{min-width:0}@media(max-width:700px){.hero-intro{grid-template-columns:minmax(0,1fr)}}
+
+/* v4 — executive analytical finding: accessible, deliberately understated. */
+.finding-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+.finding-heading h3{font-size:clamp(23px,2.5vw,34px);line-height:1.2;letter-spacing:-.7px;margin:13px 0;color:#112c4e;font-weight:800}
+.finding-heading h3 span{color:#1373e3}
+.finding-chip{display:inline-flex;flex-shrink:0;background:#eaf3ff;border:1px solid #c2dcff;border-radius:20px;color:#185aa7;padding:7px 12px;font-size:10px;font-weight:600}
+.finding-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}
+.finding-actions article{background:#f3f9ff;border:1px solid #d4e5f8;border-radius:10px;padding:16px}
+.finding-actions article>span{display:block;color:#126ed6;letter-spacing:1.1px;font-weight:700;font-size:9px;margin-bottom:10px}
+.finding-actions strong{display:block;font-size:14px;color:#102e51;margin-bottom:6px}
+.finding-actions p{font-size:12px!important;line-height:1.55!important;color:#536777;margin:0!important}
+.finding-limits{border-top:1px solid #dbe8f6;padding-top:14px;margin-top:12px!important;font-size:11px!important;line-height:1.65!important;color:#536777}
+.finding-limits strong{color:#1d3955}
+@media(max-width:700px){.finding-heading{flex-direction:column;gap:6px}.finding-actions{grid-template-columns:1fr}.finding-chip{align-self:flex-start}}
