@@ -12,7 +12,9 @@ function render() {
  const lost = data.filter(x => x.stage === 'Lost');
  for (const [id, value] of [['active', active.length], ['stalled', stale.length], ['steps', missing.length]]) document.getElementById(id).textContent = fmt(value);
  document.getElementById('reasons').textContent = lost.length ? (100 * lost.filter(x => !x.loss_reason).length / lost.length).toFixed(1) + '%' : '—';
- document.getElementById('takeaway').textContent = 'In this simulated segment, ' + fmt(stale.filter(r => r.stage === 'Proposal sent').length) + ' proposals have had no activity for 10+ days. The next move: review the context and confirm an owner and next action.';
+ const flaggedProposals = stale.filter(r => r.stage === 'Proposal sent');
+ document.getElementById('finding-count').textContent = fmt(flaggedProposals.length);
+ document.getElementById('takeaway').textContent = flaggedProposals.length ? 'In the selected synthetic segment, these proposal records crossed an illustrative inactivity threshold. That is a reason to ask what happened—not a reason to assume the jobs are lost. I would first review a small sample and verify the context before recommending a workflow change.' : 'No proposals cross the inactivity threshold in this synthetic segment. That is a useful result too: review whether the check adds value before recommending it.';
  const counts = stages.map(stage => ({stage, value: data.filter(r => r.stage === stage).length}));
  const max = Math.max(1, ...counts.map(x => x.value));
  const bars = document.getElementById('bars'); bars.replaceChildren();
@@ -56,6 +58,7 @@ fetch('data/synthetic_jobs.csv').then(r => {if (!r.ok) throw Error('Cannot load 
  document.getElementById('bars').textContent = 'The dataset could not load. Reload the page or download the CSV below.';
  document.getElementById('queue').textContent = 'Review queue unavailable.';
  document.getElementById('takeaway').textContent = 'Dataset unavailable. Download the CSV to inspect the example.';
+ document.getElementById('finding-count').textContent = '—';
  document.getElementById('loss-formula').textContent = 'Dataset unavailable';
  document.getElementById('filter-status').textContent = 'Dataset unavailable'; console.error(error);
 });
