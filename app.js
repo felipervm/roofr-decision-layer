@@ -12,6 +12,7 @@ function render() {
  const lost = data.filter(x => x.stage === 'Lost');
  for (const [id, value] of [['active', active.length], ['stalled', stale.length], ['steps', missing.length]]) document.getElementById(id).textContent = fmt(value);
  document.getElementById('reasons').textContent = lost.length ? (100 * lost.filter(x => !x.loss_reason).length / lost.length).toFixed(1) + '%' : '—';
+ document.getElementById('takeaway').textContent = 'In this simulated segment, ' + fmt(stale.filter(r => r.stage === 'Proposal sent').length) + ' proposals have had no activity for 10+ days. The next move: review the context and confirm an owner and next action.';
  const counts = stages.map(stage => ({stage, value: data.filter(r => r.stage === stage).length}));
  const max = Math.max(1, ...counts.map(x => x.value));
  const bars = document.getElementById('bars'); bars.replaceChildren();
@@ -39,13 +40,22 @@ document.querySelectorAll('[data-source]').forEach(button => button.addEventList
 fetch('data/synthetic_jobs.csv').then(r => {if (!r.ok) throw Error('Cannot load dataset'); return r.text();}).then(text => {
  const [header, ...lines] = text.trim().split(/\r?\n/); const fields = header.split(',');
  state.records = lines.filter(Boolean).map(line => {const values = line.split(','); return Object.fromEntries(fields.map((f, i) => [f, values[i] || '']));});
- for (const [id, stage] of [['mini-qualified', 'Qualified'], ['mini-inspection', 'Inspection booked']]) {
+ const allOpen = state.records.filter(r => activeStages.has(r.stage));
+ const proposals = state.records.filter(r => r.stage === 'Proposal sent' && days(r.last_activity_on) >= 10).length;
+ const allLost = state.records.filter(r => r.stage === 'Lost');
+ const noReason = allLost.filter(r => !r.loss_reason).length;
+ const previewValues = {'preview-active': allOpen.length, 'preview-proposals': proposals, 'preview-steps': allOpen.filter(r => stepStages.has(r.stage) && !r.next_step).length};
+ for (const [id, value] of Object.entries(previewValues)) document.getElementById(id).textContent = fmt(value);
+ document.getElementById('loss-formula').textContent = noReason + ' / ' + allLost.length + ' = ' + (100 * noReason / allLost.length).toFixed(1) + '%';
+ for (const [id, stage] of [['mini-proposal', 'Proposal sent'], ['mini-qualified', 'Qualified'], ['mini-inspection', 'Inspection booked']]) {
   const count = state.records.filter(r => r.stage === stage && days(r.last_activity_on) >= 10).length;
-  const el = document.getElementById(id); el.textContent = count; el.previousElementSibling.style.setProperty('--w', (count / 139 * 50) + '%');
+  const el = document.getElementById(id); el.textContent = count; el.previousElementSibling.style.setProperty('--w', (count / Math.max(1, proposals) * 50) + '%');
  }
  render();
 }).catch(error => {
  document.getElementById('bars').textContent = 'The dataset could not load. Reload the page or download the CSV below.';
  document.getElementById('queue').textContent = 'Review queue unavailable.';
+ document.getElementById('takeaway').textContent = 'Dataset unavailable. Download the CSV to inspect the example.';
+ document.getElementById('loss-formula').textContent = 'Dataset unavailable';
  document.getElementById('filter-status').textContent = 'Dataset unavailable'; console.error(error);
 });

@@ -34,3 +34,12 @@ python -m pytest tests -q
 - Roofr release notes: https://roofr.com/release-notes
 - Roofr automated communication: https://roofr.com/products
 - Roofr reporting deep dive: https://roofr.com/product-blog/understanding-your-roofing-business-with-roofrs-performance-dashboards
+## Reading the portfolio case
+The page presents an independent operational hypothesis for a career conversation with Roofr. It does not establish a product gap. Visual references, Circular typeface, and company product illustrations come from Roofr's public website; ownership remains with Roofr.
+
+All live metrics, including the hero preview and explanation, derive from `data/synthetic_jobs.csv`. The fixed snapshot produces 139 inactive proposals, not the 144 stated in an earlier external brief. The CSV and reproducible Python generator are authoritative. No monetary impact is claimed.
+
+The interface includes lead-source filters, an inactive-job review queue, and expandable metric definitions. Existing check functions can also run without pytest:
+```sh
+python -c "import runpy; t=runpy.run_path('tests/test_analysis.py'); [v() for k,v in t.items() if k.startswith('test_')]"
+```
