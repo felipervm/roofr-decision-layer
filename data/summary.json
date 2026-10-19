@@ -1,0 +1,56 @@
+{
+  "as_of": "2026-10-19",
+  "synthetic": true,
+  "total_jobs": 1200,
+  "active_jobs": 719,
+  "stalled_active": 386,
+  "stalled_rate_pct": 53.7,
+  "missing_next_step": 96,
+  "missing_next_step_rate_pct": 13.4,
+  "lost_jobs": 201,
+  "lost_missing_reason": 53,
+  "lost_missing_reason_pct": 26.4,
+  "conflicting_won_reason": 6,
+  "stage_counts": {
+    "Lead received": 163,
+    "Qualified": 165,
+    "Inspection booked": 128,
+    "Proposal sent": 263,
+    "Won": 280,
+    "Lost": 201
+  },
+  "by_source": [
+    {
+      "source": "Google search",
+      "all": 331,
+      "won": 79,
+      "stalled": 103
+    },
+    {
+      "source": "Referral",
+      "all": 349,
+      "won": 86,
+      "stalled": 110
+    },
+    {
+      "source": "Paid ads",
+      "all": 210,
+      "won": 38,
+      "stalled": 66
+    },
+    {
+      "source": "Website",
+      "all": 186,
+      "won": 41,
+      "stalled": 66
+    },
+    {
+      "source": "Door-to-door",
+      "all": 124,
+      "won": 36,
+      "stalled": 41
+    }
+  ],
+  "proposal_followups": 139,
+  "proposal_followup_value_cad": 1981750
+}
